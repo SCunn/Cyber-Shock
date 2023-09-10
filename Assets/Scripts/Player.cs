@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
 
         // Change Axis
         cameraVerticalRotation -= mouseY;
+        // Restrict camera rotation
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -90f, 90f);
 
         transform.Rotate(Vector3.up * mouseX);
         
