@@ -635,7 +635,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 49.953, y: -33.305, z: -2.531}
 --- !u!1 &770900127
 GameObject:
@@ -960,8 +960,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a8d73be55e5a042a5356935dc0ce09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 12.5
   myController: {fileID: 945648970}
+  myCameraHead: {fileID: 963194228}
+  mouseSensitivity: 700
 --- !u!143 &945648970
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1000,9 +1002,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1.0407, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 963194228}
   - {fileID: 1609151657}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1088,14 +1091,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18155423, y: -0, z: -0, w: 0.983381}
-  m_LocalPosition: {x: -0.07, y: 4.16, z: -4.68}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.444, z: 0.212}
+  m_LocalScale: {x: 1, y: 0.9608918, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.921, y: 0, z: 0}
+  m_Father: {fileID: 945648971}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &999089025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1354,7 @@ Transform:
   - {fileID: 333413743}
   - {fileID: 1090238221}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1251320309
 GameObject:
