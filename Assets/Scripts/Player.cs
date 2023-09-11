@@ -34,6 +34,23 @@ public class Player : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
+            RaycastHit hit;
+
+            if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
+            {
+                //Debug.Log("We just hit " +  hit.transform.name);
+
+                // if distance between camera position and the hit point is greater than 2, improve accuracy of bullet, otherwise hit closest object
+                if (Vector3.Distance(myCameraHead.position, hit.point) > 2f)
+                {     
+                    firePosition.LookAt(hit.point);
+                }
+            }
+            else
+            {
+                firePosition.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
+            }
+
             Instantiate(bullet, firePosition.position, firePosition.rotation);
         }
     }
