@@ -15,6 +15,11 @@ public class CameraMove : MonoBehaviour
     // LateUpdate is called once per frame after first Update call
     private void LateUpdate()
     {
+        CamMovment();
+    }
+
+    private void CamMovment()
+    {
         transform.position = myPlayerHead.position;
         transform.rotation = myPlayerHead.rotation;
     }
