@@ -15,7 +15,10 @@ public class Player : MonoBehaviour
 
     public GameObject bullet;
     public Transform firePosition;
+
+    public GameObject muzzleFlash, bulletHole;
     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
                 firePosition.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
             }
 
+            Instantiate(muzzleFlash, firePosition.position, firePosition.rotation, firePosition);
             Instantiate(bullet, firePosition.position, firePosition.rotation);
         }
     }

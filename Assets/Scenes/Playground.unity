@@ -1104,6 +1104,8 @@ MonoBehaviour:
   mouseSensitivity: 700
   bullet: {fileID: 1298764895916628641, guid: 28827e0ffb9b23b43859e94e0935dfa1, type: 3}
   firePosition: {fileID: 440548848}
+  muzzleFlash: {fileID: 1000010254994808, guid: 386076f4538dd0744b295802ff9da1d1, type: 3}
+  bulletHole: {fileID: 1000010355441670, guid: 267fc341ed0d7684a94248b10cacab72, type: 3}
 --- !u!143 &945648970
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1145,7 +1147,7 @@ Transform:
   - {fileID: 1022117518}
   - {fileID: 1609151657}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1821,7 +1823,7 @@ RectTransform:
   - {fileID: 1052460882}
   - {fileID: 1380958735}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
