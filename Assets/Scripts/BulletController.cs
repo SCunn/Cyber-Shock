@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     // Variable to control force of bullet
-    public float speed;
+    public float speed, bulletLife;
 
     // Reference to Rigidbody component
     public Rigidbody myRigidBody;
@@ -20,10 +20,25 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         BulletFly();
+
+
+        bulletLife -= Time.deltaTime; // bulletLife = bulletLife - Time.deltaTime
+
+        
+
+        if (bulletLife < 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void BulletFly()
     {
         myRigidBody.velocity = transform.forward * speed;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }
