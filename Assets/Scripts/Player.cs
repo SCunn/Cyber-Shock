@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform firePosition;
 
-    public GameObject muzzleFlash, bulletHole;
+    public GameObject muzzleFlash, bulletHole, waterLeak;
     
 
     // Start is called before the first frame update
@@ -47,6 +47,12 @@ public class Player : MonoBehaviour
                 if (Vector3.Distance(myCameraHead.position, hit.point) > 2f)
                 {     
                     firePosition.LookAt(hit.point);
+                    if(hit.collider.tag == "Shootable") 
+                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
+
+                    if(hit.collider.tag == "Floor")
+                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+
                 }
             }
             else
@@ -56,6 +62,7 @@ public class Player : MonoBehaviour
 
             Instantiate(muzzleFlash, firePosition.position, firePosition.rotation, firePosition);
             Instantiate(bullet, firePosition.position, firePosition.rotation);
+
         }
     }
 
