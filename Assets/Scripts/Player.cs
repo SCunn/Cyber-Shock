@@ -47,13 +47,16 @@ public class Player : MonoBehaviour
                 if (Vector3.Distance(myCameraHead.position, hit.point) > 2f)
                 {     
                     firePosition.LookAt(hit.point);
+
                     if(hit.collider.tag == "Shootable") 
                         Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
 
                     if(hit.collider.tag == "Floor")
                         Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
-
                 }
+
+                if(hit.collider.tag == "Enemy") // allow program to handle faster moving bullets to destroy objects
+                    Destroy(hit.collider.gameObject);
             }
             else
             {
