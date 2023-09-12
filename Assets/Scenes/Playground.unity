@@ -1204,6 +1204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12.5
+  velocity: {x: 0, y: 0, z: 0}
+  gravityModifier: 30
   myController: {fileID: 945648970}
   myCameraHead: {fileID: 1022117518}
   mouseSensitivity: 700

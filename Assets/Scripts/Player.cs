@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
 {
     public float speed = 12.5f;
 
+    // Adding gravity
+    public Vector3 velocity;
+    public float gravityModifier;
+
     public CharacterController myController;
     public Transform myCameraHead;
 
@@ -94,5 +98,14 @@ public class Player : MonoBehaviour
         movement = movement * speed * Time.deltaTime;
 
         myController.Move(movement);
+
+        // Create gravity for the player, Increase velocity
+        velocity.y += Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2) * gravityModifier;
+        // Check if controller is on the ground, if so, reset velocity 
+        if(myController.isGrounded)
+            velocity.y = Physics.gravity.y * Time.deltaTime;
+
+        // Add Gravity to the player
+        myController.Move(velocity);
     }
 }
