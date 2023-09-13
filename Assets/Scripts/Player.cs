@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
     public float crouchSpeed = 6f;
     private bool isCrouching = false;
 
+    // Animations
+    public Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +56,7 @@ public class Player : MonoBehaviour
         Jump();
         Crouching();
         Shoot();
+
     }
 
     private void Crouching()
@@ -166,6 +170,8 @@ public class Player : MonoBehaviour
             movement = movement * speed * Time.deltaTime;
         }
 
+        myAnimator.SetFloat("PlayerSpeed", movement.magnitude);
+        Debug.Log(movement.magnitude);
 
         myController.Move(movement);
 
