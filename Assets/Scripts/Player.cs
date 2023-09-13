@@ -32,14 +32,17 @@ public class Player : MonoBehaviour
 
     // Crouching
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
-    public float crouchSpeed = 6;
+    private Vector3 bodyScale;
+    public Transform myBody;
+    private float initialControllerHeight;
+    public float crouchSpeed = 6f;
     private bool isCrouching = false;
 
     // Start is called before the first frame update
     void Start()
     {
-       playerScale = transform.localScale;
+        bodyScale = myBody.localScale;
+        initialControllerHeight = myController.height;
     }
 
     // Update is called once per frame
@@ -65,13 +68,19 @@ public class Player : MonoBehaviour
 
     private void StartCrouching()
     {
-        transform.localScale = crouchScale;
+        myBody.localScale = crouchScale;
+        myCameraHead.position -= new Vector3 (0, 1f, 0);
+
+        myController.height /= 2;
         isCrouching = true;
     }
 
     private void StopCrouching()
     {
-        transform.localScale = playerScale;
+        myBody.localScale = bodyScale;
+        myCameraHead.position += new Vector3(0, 1f, 0);
+
+        myController.height = initialControllerHeight;
         isCrouching = false;
     }
 
