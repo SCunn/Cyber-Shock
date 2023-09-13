@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a8d73be55e5a042a5356935dc0ce09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 12.5
   velocity: {x: 0, y: 0, z: 0}
   gravityModifier: 20
   myController: {fileID: 945648970}
@@ -1214,12 +1214,14 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1000010254994808, guid: 386076f4538dd0744b295802ff9da1d1, type: 3}
   bulletHole: {fileID: 1000010355441670, guid: 267fc341ed0d7684a94248b10cacab72, type: 3}
   waterLeak: {fileID: 847940666380475757, guid: d190a483bee24474692340b3a6f6001c, type: 3}
+  impactDebris: {fileID: 2605377962376466829, guid: 40b17ae32d36b2c4f98cc886a5e1ddcc, type: 3}
   jumpHeight: 50
   ground: {fileID: 1610816052}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundDistance: 0.5
+  crouchSpeed: 6
 --- !u!143 &945648970
 CharacterController:
   m_ObjectHideFlags: 0

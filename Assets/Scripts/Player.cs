@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Transform firePosition;
 
-    public GameObject muzzleFlash, bulletHole, waterLeak;
+    public GameObject muzzleFlash, bulletHole, waterLeak, impactDebris;
     
     // Jumping
     public float jumpHeight = 10f;
@@ -30,10 +30,16 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public float groundDistance = 0.5f;
 
+    // Crouching
+    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    private Vector3 playerScale;
+    public float crouchSpeed = 6;
+    private bool isCrouching = false;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+       playerScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -42,8 +48,33 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CameraMovement();
         Jump();
+        Crouching();
         Shoot();
     }
+
+    private void Crouching()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+            StartCrouching();
+
+        if (Input.GetKeyUp(KeyCode.C))
+            StopCrouching();
+
+    }
+
+
+    private void StartCrouching()
+    {
+        transform.localScale = crouchScale;
+        isCrouching = true;
+    }
+
+    private void StopCrouching()
+    {
+        transform.localScale = playerScale;
+        isCrouching = false;
+    }
+
 
     void Jump()
     {
@@ -76,7 +107,7 @@ public class Player : MonoBehaviour
                         Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
 
                     if(hit.collider.tag == "Floor")
-                        Instantiate(waterLeak, hit.point, Quaternion.LookRotation(hit.normal));
+                        Instantiate(impactDebris, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 
                 if(hit.collider.tag == "Enemy") // allow program to handle faster moving bullets to destroy objects
@@ -115,7 +146,17 @@ public class Player : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 movement = x * transform.right + z * transform.forward;
-        movement = movement * speed * Time.deltaTime;
+
+        // manage crouch speed
+        if (isCrouching)
+        {
+            movement = movement * crouchSpeed * Time.deltaTime;
+        }
+        else
+        {
+            movement = movement * speed * Time.deltaTime;
+        }
+
 
         myController.Move(movement);
 
@@ -127,5 +168,8 @@ public class Player : MonoBehaviour
 
         // Add Gravity to the player
         myController.Move(velocity);
+
+
+
     }
 }
