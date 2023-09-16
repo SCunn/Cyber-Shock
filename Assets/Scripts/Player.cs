@@ -17,11 +17,6 @@ public class Player : MonoBehaviour
 
     public float mouseSensitivity = 100f;
     private float cameraVerticalRotation;
-
-    public GameObject bullet;
-    public Transform firePosition;
-
-    public GameObject muzzleFlash, bulletHole, waterLeak, impactDebris;
     
     // Animations
     public Animator myAnimator;
@@ -59,7 +54,6 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CameraMovement();
         Jump();
-        Shoot();
         Crouching();
         SlideCounter();
 
@@ -117,41 +111,7 @@ public class Player : MonoBehaviour
         myController.Move(velocity);
     }
 
-    private void Shoot()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
 
-            if(Physics.Raycast(myCameraHead.position, myCameraHead.forward, out hit, 100f))
-            {
-                //Debug.Log("We just hit " +  hit.transform.name);
-
-                // if distance between camera position and the hit point is greater than 2, improve accuracy of bullet, otherwise hit closest object
-                if (Vector3.Distance(myCameraHead.position, hit.point) > 2f)
-                {     
-                    firePosition.LookAt(hit.point);
-
-                    if(hit.collider.tag == "Shootable") 
-                        Instantiate(bulletHole, hit.point, Quaternion.LookRotation(hit.normal));
-
-                    if(hit.collider.tag == "Floor")
-                        Instantiate(impactDebris, hit.point, Quaternion.LookRotation(hit.normal));
-                }
-
-                if(hit.collider.tag == "Enemy") // allow program to handle faster moving bullets to destroy objects
-                    Destroy(hit.collider.gameObject);
-            }
-            else
-            {
-                firePosition.LookAt(myCameraHead.position + (myCameraHead.forward * 50f));
-            }
-
-            Instantiate(muzzleFlash, firePosition.position, firePosition.rotation, firePosition);
-            Instantiate(bullet, firePosition.position, firePosition.rotation);
-
-        }
-    }
 
     private void CameraMovement()
     {
