@@ -1427,6 +1427,7 @@ MonoBehaviour:
   bulletHole: {fileID: 1000010355441670, guid: 267fc341ed0d7684a94248b10cacab72, type: 3}
   waterLeak: {fileID: 847940666380475757, guid: d190a483bee24474692340b3a6f6001c, type: 3}
   impactDebris: {fileID: 2605377962376466829, guid: 40b17ae32d36b2c4f98cc886a5e1ddcc, type: 3}
+  myAnimator: {fileID: 945648972}
   jumpHeight: 50
   ground: {fileID: 1610816052}
   groundLayer:
@@ -1435,7 +1436,11 @@ MonoBehaviour:
   groundDistance: 0.5
   myBody: {fileID: 1609151657}
   crouchSpeed: 6
-  myAnimator: {fileID: 945648972}
+  isRunning: 0
+  startSliderTimer: 0
+  currentSlideTimer: 0
+  maxSlideTime: 2
+  slideSpeed: 20
 --- !u!143 &945648970
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4086,7 +4091,7 @@ Transform:
   m_GameObject: {fileID: 2019392345}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -65.37945, y: 15.467968, z: -44.08101}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 11.6695, y: 1, z: 26.6255}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1184361547}

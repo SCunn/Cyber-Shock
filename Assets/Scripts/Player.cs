@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
 
     public GameObject muzzleFlash, bulletHole, waterLeak, impactDebris;
     
+    // Animations
+    public Animator myAnimator;
+    
     // Jumping
     public float jumpHeight = 10f;
     private bool readyToJump;
@@ -38,8 +41,10 @@ public class Player : MonoBehaviour
     public float crouchSpeed = 6f;
     private bool isCrouching = false;
 
-    // Animations
-    public Animator myAnimator;
+    // Sliding
+    public bool isRunning = false, startSliderTimer;
+    public float currentSlideTimer, maxSlideTime = 2f;
+    public float slideSpeed =  20f;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +59,9 @@ public class Player : MonoBehaviour
         PlayerMovement();
         CameraMovement();
         Jump();
-        Crouching();
         Shoot();
+        Crouching();
+        SlideCounter();
 
     }
 
@@ -64,7 +70,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
             StartCrouching();
 
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C)|| currentSlideTimer > maxSlideTime)
             StopCrouching();
 
     }
@@ -77,10 +83,20 @@ public class Player : MonoBehaviour
 
         myController.height /= 2;
         isCrouching = true;
+
+        if (isRunning)
+        {
+            velocity = Vector3.ProjectOnPlane(myCameraHead.transform.forward, Vector3.up).normalized * slideSpeed * Time.deltaTime;
+            startSliderTimer = true;
+        }
     }
 
     private void StopCrouching()
     {
+        currentSlideTimer = 0f;
+        velocity = new Vector3(0f, 0f, 0f);
+        startSliderTimer = false;
+
         myBody.localScale = bodyScale;
         myCameraHead.position += new Vector3(0, 1f, 0);
 
@@ -164,6 +180,8 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             movement = movement * runSpeed * Time.deltaTime;
+
+            isRunning = true;
         }
         // manage crouch speed
         else if (isCrouching)
@@ -173,6 +191,8 @@ public class Player : MonoBehaviour
         else
         {
             movement = movement * speed * Time.deltaTime;
+
+            isRunning = false;
         }
 
         myAnimator.SetFloat("PlayerSpeed", movement.magnitude);
@@ -191,5 +211,14 @@ public class Player : MonoBehaviour
 
 
 
+    }
+
+    private void SlideCounter()
+    {
+        if (startSliderTimer) 
+        {
+            currentSlideTimer = Time.deltaTime;
+        }
+        
     }
 }
